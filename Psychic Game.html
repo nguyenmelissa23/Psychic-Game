@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Psychic Game</title>
+  </head>
+
+  <body>
+  	<h1>The Psychic Game</h1>
+  	<h2>Guess what letter the computer picked!</h2>
+  	<p id="numWins"></p>
+    <p id="numLosses"></p>
+    <p id="numGuesses"></p>
+    <p id="printGuesses"> <p id="letters"></p> </p>
+    
+<script type="text/javascript">    
+    //Declare initial values:
+    var wins=0;
+    var losses=0;
+    var guessesLeft=10;
+	var keys =["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "s", "y", "z"]; 
+	var letters=[];
+	var compPick= keys[Math.floor(Math.random() * keys.length)];
+	console.log(compPick);
+	//compt guess again function
+	function compGuessAgain() {
+		compPick = keys[Math.floor(Math.random() * keys.length)];
+	}
+
+    //Run this block of code when press any key
+	document.onkeyup=function(event){
+
+		//if number of guess is less than 10
+		if (guessesLeft>0){
+			//user guesses
+			var userGuess = event.key;
+			//alert("You picked: " + userGuess);
+	    	//conditions
+  	  		if (userGuess===compPick){
+		   		wins++;
+		   		guessesLeft=10;
+		   		letters=[];
+	   			wrongletters=letters.join("  ");
+		   		compGuessAgain();
+		   		console.log(compPick);
+		   	}
+		   	else if (userGuess!=compPick) {
+		   		guessesLeft--;
+		   		letters.push(userGuess);
+				//console.log(letters);
+				var wrongletters=letters.join( );
+				//console.log(letters.join());
+		   	}
+		}
+
+	   else {
+	   	//document.getElementById("numGuesses").innerHTML= ("Guesses Left: " + guessesLeft);
+	   	alert("You are out of guesses!")
+	   	losses++;
+	   	//document.getElementById("numLosses").innerHTML= ("Losses: " + losses);
+	   	guessesLeft=10;
+	   	compGuessAgain();
+	   	console.log(compPick);
+	   	alert("New game");
+	   	letters=[];
+	   	wrongletters=letters.join("  ");
+	   } 
+
+		
+		//check in console
+		console.log(userGuess);	
+		//console.log(losses);
+		//console.log(guessesLeft);
+
+   		//DOM output
+   		document.getElementById("numWins").innerHTML= ("Wins: " + wins);
+   		document.getElementById("numLosses").innerHTML= ("Losses: " + losses);
+   		document.getElementById("numGuesses").innerHTML= ("Guesses Left: " + guessesLeft);
+   		document.getElementById("printGuesses").innerHTML= ("Your guess so far: " + wrongletters);
+
+   	};
+
+</script>
+ </body>
+</html>
